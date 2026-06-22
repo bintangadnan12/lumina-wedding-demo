@@ -44,7 +44,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* ── CSS variables — Lumina (Champagne/Ivory) ─ */
+/* ── CSS variables — Lumina Light (default) ─ */
 :root {
   --radius: 0rem;
 
@@ -59,10 +59,23 @@
   --section-alt: #F3EDE4;
 }
 
+/* ── Dark mode override ─────────────────────── */
+html.dark {
+  --bg:        #1C1814;
+  --gold:      #C49A5A;
+  --gold-soft: rgba(196,154,90,0.10);
+  --ink:       #FAF8F4;
+  --blush:     #251F1A;
+  --card-bg:   #241E19;
+  --border-clr: rgba(250,248,244,0.08);
+  --muted-txt: #A09488;
+  --section-alt: #201B16;
+}
+
 /* ── Base ────────────────────────────────────── */
 @layer base {
   *, *::before, *::after { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: auto; } /* Lenis handles smooth scroll */
 
   body {
     background-color: var(--bg);
@@ -140,3 +153,31 @@ body::after {
 /* ── Section alternating bg ─────────────────── */
 .section-alt { background: var(--blush); }
 .section-dark { background: var(--ink); }
+
+/* ── Custom cursor ─────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0; left: 0;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  pointer-events: none;
+  z-index: 9990;
+  will-change: transform;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0; left: 0;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(196,154,90,0.55);
+  pointer-events: none;
+  z-index: 9989;
+  will-change: transform;
+  transition: width 0.25s, height 0.25s, opacity 0.25s;
+}
+
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
